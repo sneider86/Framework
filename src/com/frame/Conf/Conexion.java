@@ -26,6 +26,7 @@ public class Conexion {
     private PreparedStatement prepared;
     private ResultSet result;
     private Connection con;
+    private String ssl;
     /**
      *
      * @param usuario Se establece el valor de usuario para la conexion a la Base de Datos.
@@ -39,6 +40,11 @@ public class Conexion {
         this.con=null;
         this.result=null;
         this.prepared=null;
+        this.ssl="false";
+    }
+
+    public Conexion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     /**
      *
@@ -156,6 +162,20 @@ public class Conexion {
     }
     /**
      *
+     * @return Se obtiene el estado de la conexion ssl
+     */
+    public String getSSl(){
+        return this.ssl;
+    }
+    /**
+     *
+     * @param ssl Se establece el valor de la conexion.
+     */
+    public void setSSl(String ssl){
+        this.ssl=ssl;
+    }
+    /**
+     *
      * Se conecta a la Base de Datos.
      * @throws java.lang.Exception
      */
@@ -166,7 +186,7 @@ public class Conexion {
                     if(!this.getBD().trim().equals("")){
                         try{
                             Class.forName("com.mysql.jdbc.Driver");
-                            this.con=DriverManager.getConnection("jdbc:mysql://"+this.host+"/"+this.bd+"?useServerPrepStmts=true",this.usuario,this.clave);
+                            this.con=DriverManager.getConnection("jdbc:mysql://"+this.host+"/"+this.bd+"?useServerPrepStmts=true&useSSL="+this.ssl,this.usuario,this.clave);
                         }catch(ClassNotFoundException | SQLException err){
                             throw new Exception(err.getMessage());
                         }
