@@ -27,6 +27,10 @@ public class ParametrosQuery {
         this.tipovalor=tipovalor;
         this.valor=valor;
     }
+
+    public ParametrosQuery() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     /**
      * 
      * @return  Obtiene el tipo de dato del valor ingresado ejem. (int,String,Double..etc)
