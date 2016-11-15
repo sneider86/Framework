@@ -6,6 +6,8 @@
 package com.frame.Conf;
 
 import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 import javax.swing.JPanel;
 import org.jdatepicker.impl.JDatePanelImpl;
@@ -22,7 +24,6 @@ public class DatePickerCustom extends JPanel{
     private JDatePanelImpl datePanel;
     private JDatePickerImpl datePicker;
     private Properties p;
-    //private DateLabelFormatter labformat;
     public DatePickerCustom(){
         this.model = new UtilDateModel();
         Properties p = new Properties();
@@ -34,7 +35,7 @@ public class DatePickerCustom extends JPanel{
         this.datePanel.setForeground(Color.yellow);
         
         this.datePicker = new JDatePickerImpl(this.datePanel,new DateLabelFormatter());
-        this.add(this.datePicker);
+        this.add(this.datePicker);        
     }
     public UtilDateModel getModel(){
         return this.model;
@@ -42,6 +43,44 @@ public class DatePickerCustom extends JPanel{
     public void setModel(UtilDateModel model){
         this.model=model;
     }
+    /**
+     * Obtiene el dia de la fecha seleccionada.
+     * @return Retorna un int
+     */
+    public int getDay(){
+        return this.model.getDay();
+    }
+    /**
+     * Obtiene el mes de la fecha seleccionada.
+     * @return Retorna un int
+     */
+    public int getMonth(){
+        return this.model.getMonth();
+    }
+    /**
+     * Obtiene el año de la fecha seleccionada.
+     * @return Retorna un int
+     */
+    public int getYear(){
+        return this.model.getYear();
+    }
+    /**
+     * Obtiene la fecha seleccionada en el calendario
+     * @param format Formato de la fecha seleccionada
+     * @return Retorna un String
+     */
+    public String dateSelect(String format){
+        SimpleDateFormat dateFormatter = new SimpleDateFormat(format);
+        return dateFormatter.format(this.model.getValue().getTime());
+    }
+    /**
+     * Obtiene la fecha seleccionada en el calendario
+     * @return Retorna un objeto tipo Date
+     */
+    public Date dateSelect(){
+        return this.model.getValue();
+    }
+    
     
     
     

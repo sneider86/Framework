@@ -14,6 +14,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -150,7 +151,7 @@ public class Conexion {
      *
      * @return Se obtiene el valor de la conexion.
      */
-    private Connection getCon(){
+    public Connection getCon(){
         return this.con;
     }
     /**
@@ -246,8 +247,6 @@ public class Conexion {
                     }
                 }
                 if(this.prepared!=null){
-                    
-                
                 }else{
                     throw new Exception();
                 }
@@ -286,6 +285,11 @@ public class Conexion {
                     Date date = formatter.parse(param.getValor().toString()); // mysql datetime format
                     java.sql.Timestamp fe = new java.sql.Timestamp(date.getTime());
                     this.prepared.setTimestamp(index, fe);
+                break;
+                case 6:
+                    SimpleDateFormat formatter2 = new SimpleDateFormat("yyyy-MM-dd"); // your template here
+                    Date date2 = formatter2.parse(param.getValor().toString()); // mysql datetime format
+                    this.prepared.setDate(index,new java.sql.Date(date2.getTime()));
                 break;
             }
         }catch(NumberFormatException | SQLException err){
@@ -360,7 +364,7 @@ public class Conexion {
     public void prepararConsulta(String sql) throws Exception{
         try{
             if(this.getCon()!=null){
-                this.prepared=this.getCon().prepareStatement(sql);
+                this.prepared=this.getCon().prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
             }else{
                 throw new Exception("No se pudo preparar la consulta porque no hay conexion con la Base de Datos");
             }

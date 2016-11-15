@@ -41,5 +41,25 @@ public class ComboBoxCustom extends JComboBox{
     public String getValue(){
         return (String) this.value.get(this.getSelectedIndex());
     }
-    
+    /**
+     * Establece un key en el ComboBox
+     * @param key 
+     * @throws java.lang.Exception 
+     */
+    public void setKey(String key) throws Exception{
+        if(!key.trim().equals("")){
+            boolean sw=false;
+            for(int i=0;i<this.key.size();i++){
+                if(this.key.get(i).equals(key)){
+                    this.setSelectedIndex(i);
+                    sw=true;
+                }
+            }
+            if(!sw){
+                throw new Exception("El valor a establecer no existe");
+            }
+        }else{
+            throw new Exception("El Key no puede estar vacío");
+        }
+    }
 }
