@@ -291,6 +291,9 @@ public class Conexion {
                     Date date2 = formatter2.parse(param.getValor().toString()); // mysql datetime format
                     this.prepared.setDate(index,new java.sql.Date(date2.getTime()));
                 break;
+                case 7:
+                    this.prepared.setString(index,"%"+param.getValor().toString()+"%");
+                break;
             }
         }catch(NumberFormatException | SQLException err){
             throw new Exception(err.getMessage());

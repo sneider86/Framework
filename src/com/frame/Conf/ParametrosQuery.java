@@ -21,6 +21,8 @@ public class ParametrosQuery {
      * 3:Double
      * 4:Boolean
      * 5:DateTime (yyyy-MM-dd HH:mm:ss)
+     * 6:Date (yyyy-MM-dd)
+     * 7:String (Like)
      * @param valor
      */
     public ParametrosQuery(int tipovalor,Object valor){
